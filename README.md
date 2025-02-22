@@ -1,0 +1,1 @@
+# pedator-admin-panel
