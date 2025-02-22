@@ -4,6 +4,7 @@ import DashboardPage from "./pages/protectedPage/DashboardPage";
 import LearnersPage from "./pages/protectedPage/LearnersPage";
 import MentorsPage from "./pages/protectedPage/MentorsPage";
 import CoursesPage from "./pages/protectedPage/CoursesPage";
+import TransactionsPage from "./pages/protectedPage/TransitionPage";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/learners" element={<LearnersPage />} />
           <Route path="/mentors" element={<MentorsPage/>} />
           <Route path="/courses" element={<CoursesPage/>} />
+          <Route path="/transitions" element={<TransactionsPage/>} />
         </Route>
       </Routes>
     </BrowserRouter>
