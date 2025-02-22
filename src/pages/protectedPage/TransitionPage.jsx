@@ -7,6 +7,7 @@ import deleteButton from "../../assets/images/trash-2.png";
 import listFilter from "../../assets/images/list-filter.png";
 import addButtonWhite from "../../assets/images/plus-white.png";
 import { transactions, transitionsColumns } from "../../constants/global.constant";
+import { Link } from "react-router-dom";
 
 
 const dashboardStats = {
@@ -39,9 +40,9 @@ const TransactionsPage = () => {
             <td>
               <div className=" flex items-center gap-2">
                 {/* edit */}
-                <button title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+                <Link to={"/transitions/id"} title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
                   <img src={viewbutton} alt="" width={16} height={16} />
-                </button>
+                </Link>
               </div>
             </td>
           </tr>
