@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import loginImage from "../../assets/images/Login.png";
 import AnimatedHeading from "../../components/AnimatedHeading";
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
