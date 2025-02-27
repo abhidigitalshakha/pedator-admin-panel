@@ -7,6 +7,7 @@ import viewbutton from "../../assets/images/eye.png";
 import deleteButton from "../../assets/images/trash-2.png";
 import listFilter from "../../assets/images/list-filter.png";
 import addButtonWhite from "../../assets/images/plus-white.png";
+import { Link } from "react-router-dom";
 
 // const columns = [
 //   {
@@ -51,9 +52,9 @@ const MentorsPage = () => {
         <td>
           <div className=" flex items-center gap-2">
             {/* edit */}
-            <button title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            <Link to={"/mentors/id"} title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
               <img src={viewbutton} alt="" width={16} height={16} />
-            </button>
+            </Link>
             <button  title="Edit " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
               <img src={editbutton} alt="" width={16} height={16} />
             </button>

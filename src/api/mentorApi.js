@@ -1,6 +1,7 @@
 // src/api/mentorApi.js
 
 import axiosInstance from './axiosInstance';
+import { APIS } from './sheet';
 
 // Fetch list of all mentors
 export const getMentors = async () => {
@@ -15,7 +16,7 @@ export const getMentors = async () => {
 // Add a mentor using email and password
 export const addMentorWithEmailPassword = async (mentorData) => {
   try {
-    const response = await axiosInstance.post('/api/v1/mentor/register/email', mentorData);
+    const response = await axiosInstance.post(APIS.MENTOR_ADD_WITH_EMAIL_PASSWORD, mentorData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error adding mentor with email');
@@ -35,7 +36,7 @@ export const addMentorWithMobilePassword = async (mentorData) => {
 // Permanently delete a mentor
 export const deleteMentorPermanently = async (mentorId) => {
   try {
-    const response = await axiosInstance.delete(`/api/v1/mentor/delete/${mentorId}`);
+    const response = await axiosInstance.delete(`${APIS.MENTOR_DELETE_PERMANENTLY}${mentorId}`);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error deleting mentor permanently');

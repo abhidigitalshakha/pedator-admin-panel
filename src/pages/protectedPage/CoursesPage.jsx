@@ -11,6 +11,7 @@ import viewbutton from "../../assets/images/eye.png";
 import deleteButton from "../../assets/images/trash-2.png";
 import listFilter from "../../assets/images/list-filter.png";
 import addButtonWhite from "../../assets/images/plus-white.png";
+import { Link } from "react-router-dom";
 
 const CoursesPage = () => {
   const renderRow = (item, index) => {
@@ -29,13 +30,14 @@ const CoursesPage = () => {
         <td className="hidden md:table-cell">{item.status}</td>
         <td>
           <div className=" flex items-center gap-2">
-            {/* edit */}
-            <button
+            {/* view */}
+            <Link to={"/courses/id"}
               title="View "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
-            >
+              >
               <img src={viewbutton} alt="" width={16} height={16} />
-            </button>
+            </Link>
+              {/* edit */}
             <button
               title="Edit "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
