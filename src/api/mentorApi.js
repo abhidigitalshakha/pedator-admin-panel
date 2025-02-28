@@ -6,7 +6,7 @@ import { APIS } from './sheet';
 // Fetch list of all mentors
 export const getMentors = async () => {
   try {
-    const response = await axiosInstance.get('/api/v1/mentor/all');
+    const response = await axiosInstance.get(APIS.MENTOR_LIST);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error fetching mentors');
@@ -26,7 +26,7 @@ export const addMentorWithEmailPassword = async (mentorData) => {
 // Add a mentor using mobile and password
 export const addMentorWithMobilePassword = async (mentorData) => {
   try {
-    const response = await axiosInstance.post('/api/v1/mentor/register/mobile', mentorData);
+    const response = await axiosInstance.post(APIS.MENTOR_ADD_WITH_MOBILE_PASSWORD, mentorData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error adding mentor with mobile');
