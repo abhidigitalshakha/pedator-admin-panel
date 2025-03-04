@@ -1,12 +1,13 @@
 // src/api/courseApi.js
 import axiosInstance from './axiosInstance';
+import { APIS } from './sheet';
 
 // COURSE CATEGORY API FUNCTIONS
 
 // Add Course Category
 export const addCourseCategory = async (categoryData) => {
   try {
-    const response = await axiosInstance.post('/api/v1/course/courseCategory/add', categoryData);
+    const response = await axiosInstance.post(APIS.COURSE_CATEGORY_ADD, categoryData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error adding course category');
@@ -16,7 +17,7 @@ export const addCourseCategory = async (categoryData) => {
 // Get Course Categories
 export const getCourseCategories = async () => {
   try {
-    const response = await axiosInstance.get('/api/v1/course/courseCategory/all');
+    const response = await axiosInstance.get(APIS.COURSE_CATEGORY_LIST);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error fetching course categories');
@@ -26,7 +27,7 @@ export const getCourseCategories = async () => {
 // Update Course Category
 export const updateCourseCategory = async (categoryId, categoryData) => {
   try {
-    const response = await axiosInstance.put(`/api/v1/course/courseCategory/update/${categoryId}`, categoryData);
+    const response = await axiosInstance.put(`${COURSE_CATEGORY_UPDATE}${categoryId}`, categoryData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error updating course category');
@@ -36,7 +37,7 @@ export const updateCourseCategory = async (categoryId, categoryData) => {
 // Delete Course Category
 export const deleteCourseCategory = async (categoryId) => {
   try {
-    const response = await axiosInstance.delete(`/api/v1/course/courseCategory/delete/${categoryId}`);
+    const response = await axiosInstance.delete(`${COURSE_CATEGORY_DELETE}${categoryId}`);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error deleting course category');
@@ -48,7 +49,7 @@ export const deleteCourseCategory = async (categoryId) => {
 // Add Course Subcategory
 export const addCourseSubCategory = async (subCategoryData) => {
   try {
-    const response = await axiosInstance.post('/api/v1/course/courseSubCategory/add', subCategoryData);
+    const response = await axiosInstance.post(APIS.COURSE_SUB_CATEGORY_ADD, subCategoryData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error adding course subcategory');
@@ -58,7 +59,7 @@ export const addCourseSubCategory = async (subCategoryData) => {
 // Get Course Subcategories
 export const getCourseSubCategories = async () => {
   try {
-    const response = await axiosInstance.get('/api/v1/course/courseSubCategory/all');
+    const response = await axiosInstance.get(APIS.COURSE_SUB_CATEGORY_LIST);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error fetching course subcategories');
@@ -68,7 +69,7 @@ export const getCourseSubCategories = async () => {
 // Update Course Subcategory
 export const updateCourseSubCategory = async (subCategoryId, subCategoryData) => {
   try {
-    const response = await axiosInstance.put(`/api/v1/course/courseSubCategory/update/${subCategoryId}`, subCategoryData);
+    const response = await axiosInstance.put(`${COURSE_SUB_CATEGORY_UPDATE}${subCategoryId}`, subCategoryData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error updating course subcategory');
@@ -78,7 +79,7 @@ export const updateCourseSubCategory = async (subCategoryId, subCategoryData) =>
 // Delete Course Subcategory
 export const deleteCourseSubCategory = async (subCategoryId) => {
   try {
-    const response = await axiosInstance.delete(`/api/v1/course/courseSubCategory/delete/${subCategoryId}`);
+    const response = await axiosInstance.delete(`${COURSE_SUB_CATEGORY_DELETE}${subCategoryId}`);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error deleting course subcategory');
@@ -90,7 +91,7 @@ export const deleteCourseSubCategory = async (subCategoryId) => {
 // Add Course
 export const addCourse = async (courseData) => {
   try {
-    const response = await axiosInstance.post('/api/v1/course/add', courseData);
+    const response = await axiosInstance.post({COURSE_ADD}, courseData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error adding course');
@@ -100,7 +101,7 @@ export const addCourse = async (courseData) => {
 // Get Courses
 export const getCourses = async () => {
   try {
-    const response = await axiosInstance.get('/api/v1/course/all');
+    const response = await axiosInstance.get(APIS.COURSE_LIST);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error fetching courses');
@@ -110,7 +111,7 @@ export const getCourses = async () => {
 // Update Course
 export const updateCourse = async (courseId, courseData) => {
   try {
-    const response = await axiosInstance.put(`/api/v1/course/update/${courseId}`, courseData);
+    const response = await axiosInstance.put(`${APIS.COURSE_UPDATE}${courseId}`, courseData);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error updating course');
@@ -120,7 +121,7 @@ export const updateCourse = async (courseId, courseData) => {
 // Delete Course
 export const deleteCourse = async (courseId) => {
   try {
-    const response = await axiosInstance.delete(`/api/v1/course/delete/${courseId}`);
+    const response = await axiosInstance.delete(`${COURSE_DELETE}${courseId}`);
     return response.data;
   } catch (error) {
     throw new Error(error.response ? error.response.data.message : 'Error deleting course');
