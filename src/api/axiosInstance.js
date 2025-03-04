@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // You can add headers here, such as for authentication
-    const token = localStorage.getItem('token');  // Assuming token is stored in localStorage
+    const token = JSON.parse(localStorage.getItem('token'));  // Assuming token is stored in localStorage
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

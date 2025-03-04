@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import loginImage from "../../assets/images/Login.png";
 import AnimatedHeading from "../../components/AnimatedHeading";
 import { useAdminLogin } from "../../hooks/useAdminLogin";
@@ -9,6 +9,14 @@ const LoginPage = () => {
   const { mutate, isPending, isError, error, status } = useAdminLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      navigate("/dashboard");
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,10 +51,20 @@ const LoginPage = () => {
           </div>
           <div className="flex flex-col justify-center items-center">
             <div className=" p-8 rounded-lg border border-gray-300 ">
-              <p className={`text-center text-gray-600 ${isError ? "mb-2":"mb-8"} font-[500] text-3xl`}>
+              <p
+                className={`text-center text-gray-600 ${
+                  isError ? "mb-2" : "mb-8"
+                } font-[500] text-3xl`}
+              >
                 Sign in to <span className="text-[#108e88]">Pedator</span>
               </p>
-              <p className={`text-red-500 ${isError ? "mb-2 block text-center" :"hidden"}`}>{isError && error.message}</p>
+              <p
+                className={`text-red-500 ${
+                  isError ? "mb-2 block text-center" : "hidden"
+                }`}
+              >
+                {isError && error.message}
+              </p>
               <form onSubmit={handleSubmit} className="min-w-[350px]">
                 <div className="mb-6">
                   <div className="relative">

@@ -7,7 +7,7 @@ export const useAdminLogin = () => {
         onSuccess: (data) => {
             console.log("Login successful:", data);
             localStorage.setItem("user", JSON.stringify(data?.user));  
-            localStorage.setItem("token", data?.token);
+            localStorage.setItem("token", JSON.stringify(data?.token));
         },
         onError: (error) => {
             console.error("Login failed:", error.message);
