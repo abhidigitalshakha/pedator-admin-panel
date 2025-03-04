@@ -1,45 +1,31 @@
 import React from "react";
 import Table from "../../components/Table";
 import SearchBar from "../../components/SearchBar";
-import { mentors, tutors, tutorsColumns } from "../../constants/global.constant";
+import { tutorsColumns } from "../../constants/global.constant";
 import editbutton from "../../assets/images/square-pen.png";
 import viewbutton from "../../assets/images/eye.png";
 import deleteButton from "../../assets/images/trash-2.png";
 import listFilter from "../../assets/images/list-filter.png";
 import addButtonWhite from "../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
+import { useMentors } from "../../hooks/useMentors";
 
-// const columns = [
-//   {
-//     header: "S.No",
-//     assessor: "sNo",
-//     className: "p-4",
-//   },
-//   {
-//     header: "Username",
-//     assessor: "Username",
-//     className: "hidden md:table-cell",
-//   },
-//   {
-//     header: "E-mail",
-//     assessor: "eMail",
-//     className: "hidden md:table-cell",
-//   },
-//   {
-//     header: "Mobile No",
-//     assessor: "mobileNo",
-//     className: "hidden md:table-cell",
-//   },
-//   {
-//     header: "Actions",
-//     assessor: "actions",
-//   },
-// ];
 
 const MentorsPage = () => {
-  const renderRow = (item, index) => {
-    // console.log(item,"itemhiqwertyuasdfghj");
+const { data: mentors, status, error } = useMentors();
 
+  if (status === "pending") {
+    return <div className="bg-white p-4 rounded-md flex-1 justify-center items-center flex min-h-[80%] m-4 border border-gray-300 shadow-xl">
+      <p>Loading...</p>
+    </div>;
+  }
+
+  if (status === "error") {
+    return <p>Error: {error.message}</p>;
+  }
+  console.log(mentors.data,"courser");
+  
+  const renderRow = (item, index) => {
     return (
       <tr
         key={index}
@@ -88,7 +74,7 @@ const MentorsPage = () => {
           </div>
         </div>
       </div>
-      <Table columns={tutorsColumns} renderRow={renderRow} data={tutors} />
+      <Table columns={tutorsColumns} renderRow={renderRow} data={mentors} />
     </div>
   );
 };

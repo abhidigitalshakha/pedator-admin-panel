@@ -12,7 +12,7 @@ const Table = ({ columns, renderRow, data }) => {
           ))}
         </tr>
       </thead>
-      <tbody>{data?.map((item,index) => renderRow(item,index))}</tbody>
+      <tbody>{data.data?.map((item,index) => renderRow(item,index))}</tbody>
     </table>
   );
 };

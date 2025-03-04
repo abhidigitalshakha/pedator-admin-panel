@@ -1,24 +1,16 @@
-// src/hooks/useAdminLogin.js
+import { useMutation } from "@tanstack/react-query";
+import { adminLogin } from "../api/authApi";
 
-import { useMutation } from 'react-query';
-import { adminLogin } from '../api/authApi';
-
-// Admin Login Hook using React Query's useMutation
 export const useAdminLogin = () => {
-    return useMutation(
-        async (credentials) => {
-            return await adminLogin(credentials);
+    return useMutation({
+        mutationFn: async (credentials) => await adminLogin(credentials),
+        onSuccess: (data) => {
+            console.log("Login successful:", data);
+            localStorage.setItem("user", JSON.stringify(data?.user));  
+            localStorage.setItem("token", data?.token);
         },
-        { 
-            onSuccess: (data) => {
-                console.log('Login successful:', data);
-                // navigate('/dashboard')
-                localStorage.setItem('user', JSON.stringify(RESPONSE?.user))
-                localStorage.setItem('token', RESPONSE?.token)
-            },
-            onError: (error) => {
-                console.error('Login failed:', error.message);
-            }
+        onError: (error) => {
+            console.error("Login failed:", error.message);
         }
-    );
+    });
 };

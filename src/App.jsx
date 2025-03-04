@@ -11,6 +11,7 @@ import QueryClientWrapper from "./context/QueryClientProvider";
 import LearnersDetailPage from "./pages/protectedPage/LearnersDetailPage";
 import MentorDetailPage from "./pages/protectedPage/MentorDetailPage";
 import CourseDetailPage from "./pages/protectedPage/CourseDetailPage";
+import PageNotFound from "./pages/publicInfoPage/PageNotFound";
 
 function App() {
   return (
@@ -27,8 +28,11 @@ function App() {
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/courses/id" element={<CourseDetailPage />} />
             <Route path="/transitions" element={<TransactionsPage />} />
-            <Route path="/transitions/id" element={<TransactionDetailsPage />}
+            <Route
+              path="/transitions/id"
+              element={<TransactionDetailsPage />}
             />
+            <Route path="/*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,22 +1,29 @@
 import React from "react";
 import Table from "../../components/Table";
 import SearchBar from "../../components/SearchBar";
-import {
-  courses,
-  coursesColumns,
-  mentors,
-} from "../../constants/global.constant";
+import { courses, coursesColumns } from "../../constants/global.constant";
 import editbutton from "../../assets/images/square-pen.png";
 import viewbutton from "../../assets/images/eye.png";
 import deleteButton from "../../assets/images/trash-2.png";
 import listFilter from "../../assets/images/list-filter.png";
 import addButtonWhite from "../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
+import { useCourses } from "../../hooks/useCourseCategories";
 
 const CoursesPage = () => {
-  const renderRow = (item, index) => {
-    // console.log(item,"itemhiqwertyuasdfghj");
+  const { data: courses, status, error } = useCourses();
 
+  if (status === "pending") {
+    return <p>Loading courses...</p>;
+  }
+
+  if (status === "error") {
+    return <p>Error: {error.message}</p>;
+  }
+  console.log(courses.data,"courser");
+  
+
+  const renderRow = (item, index) => {
     return (
       <tr
         key={index}
@@ -24,20 +31,21 @@ const CoursesPage = () => {
       >
         <td className="flex items-center gap-4 p-4">{index + 1}</td>
         <td className="hidden md:table-cell">{item.title}</td>
-        <td className="hidden md:table-cell">{item.category}</td>
-        <td className="hidden md:table-cell">{item.subCategory}</td>
-        <td className="hidden md:table-cell">{item.educator}</td>
+        <td className="hidden md:table-cell">{item.categoryId.name}</td>
+        <td className="hidden md:table-cell">{item.subCategoryId.name}</td>
+        <td className="hidden md:table-cell">{item?.mentorId?.firstName}</td>
         <td className="hidden md:table-cell">{item.status}</td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}
-            <Link to={"/courses/id"}
+            <Link
+              to={"/courses/id"}
               title="View "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
-              >
+            >
               <img src={viewbutton} alt="" width={16} height={16} />
             </Link>
-              {/* edit */}
+            {/* edit */}
             <button
               title="Edit "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
