@@ -8,7 +8,7 @@ import listFilter from "../../../assets/images/list-filter.png";
 import addButtonWhite from "../../../assets/images/plus-white.png";
 import {
   transactions,
-  transitionsColumns,
+  TransactionColumns,
 } from "../../../constants/global.constant";
 import { Link } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const TransactionsPage = () => {
           <div className=" flex items-center gap-2">
             {/* edit */}
             <Link
-              to={"/transitions/id"}
+              to={"/Transaction/id"}
               title="View "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >
@@ -95,7 +95,7 @@ const TransactionsPage = () => {
       {/* Transactions Table */}
       <div className="flex items-center justify-between">
         <h1 className=" hidden md:block text-xl md:text-2xl font-semibold text-[#108e88]">
-          Recent Transitions
+          Recent Transaction
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-4  w-full md:w-auto">
           <SearchBar />
@@ -112,7 +112,7 @@ const TransactionsPage = () => {
         </div>
       </div>
       <Table
-        columns={transitionsColumns}
+        columns={TransactionColumns}
         renderRow={renderRow}
         data={transactions}
       />

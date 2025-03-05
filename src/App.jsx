@@ -50,9 +50,9 @@ function App() {
               <Route path="/country/:id" element={<CountryDetailPage />} />
               <Route path="/state/:id" element={<StateDetailPage />} />
               <Route path="/city/:id" element={<CityDetailPage />} />
-              <Route path="/transitions" element={<TransactionsPage />} />
+              <Route path="/Transaction" element={<TransactionsPage />} />
               <Route
-                path="/transitions/id"
+                path="/Transaction/id"
                 element={<TransactionDetailsPage />}
               />
               <Route path="/*" element={<PageNotFound />} />
