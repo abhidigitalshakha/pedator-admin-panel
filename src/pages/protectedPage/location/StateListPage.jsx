@@ -13,20 +13,22 @@ import {
 } from "../../../constants/global.constant";
 import { useStates } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddStateModal from "../../../components/modals/AddStateModal";
+import AddStateModal from "../../../components/modals/add/AddStateModal";
+import EditStateModal from "../../../components/modals/edit/EditStateModal";
 
 const StateListPage = () => {
   const { data: states, status, error } = useStates();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedState, setSelectedState] = useState(null);
 
   if (status === "pending") {
-    return <PediatorLoader/>;
+    return <PediatorLoader />;
   }
 
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  
 
   // Example list of countries (Replace with API data)
   const countries = [
@@ -35,12 +37,24 @@ const StateListPage = () => {
     { id: "3", name: "Canada" },
   ];
 
+  // handle form edit
+  const handleEdit = (state) => {
+    setSelectedState(state); // Store selected state
+    setEditModalOpen(true); // Open modal
+  };
+
   // Handle form submission
   const handleAddState = (formData) => {
     console.log("State Submitted:", formData);
     // You can send formData to an API here
   };
 
+  // Handle updating an existing state
+  const handleUpdateState = (updatedState) => {
+    console.log("Updated State Data:", updatedState);
+    // API call to update the state
+    setEditModalOpen(false); // Close modal after update
+  };
 
   const renderRow = (item, index) => {
     console.log(item, "state");
@@ -52,7 +66,9 @@ const StateListPage = () => {
         <td className="flex items-center gap-4 p-4">{index + 1}</td>
         <td className="hidden md:table-cell">{item?.name}</td>
         <td className="hidden md:table-cell">{item?.countryName}</td>
-        <td className="hidden md:table-cell">{item?.status}</td>
+        <td className="hidden md:table-cell">
+          {item?.status ? "Active" : "Inactive"}
+        </td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}
@@ -65,6 +81,7 @@ const StateListPage = () => {
             </Link>
             {/* edit */}
             <button
+              onClick={() => handleEdit(item)}
               title="Edit"
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >
@@ -96,7 +113,10 @@ const StateListPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl"
+            >
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -106,13 +126,20 @@ const StateListPage = () => {
       <Table columns={stateColumns} renderRow={renderRow} data={states} />
       {/* Render the Modal When Open */}
       {isModalOpen && (
-        <AddStateModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          onSubmit={handleAddState} 
-          countries={countries} 
+        <AddStateModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleAddState}
+          countries={countries}
         />
       )}
+      <EditStateModal
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        onSubmit={handleUpdateState}
+        stateData={selectedState}
+        countries={countries}
+      />
     </div>
   );
 };

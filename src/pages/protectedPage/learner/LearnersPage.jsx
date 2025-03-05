@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../../components/Table";
 import SearchBar from "../../../components/SearchBar";
 import { learnersColumns, mentors } from "../../../constants/global.constant";
@@ -8,12 +8,22 @@ import deleteButton from "../../../assets/images/trash-2.png";
 import listFilter from "../../../assets/images/list-filter.png";
 import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
-
+import AddLearnerModal from "../../../components/modals/add/AddLearnerModal";
 
 const LearnersPage = () => {
-  const renderRow = (item, index) => {
-    // console.log(item,"itemhiqwertyuasdfghj");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Function to handle modal open/close
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+
+  // Function to handle form submission
+  const handleAddLearner = (learnerData) => {
+    console.log("New Learner Data:", learnerData);
+    // TODO: Send learnerData to backend via API
+  };
+
+  const renderRow = (item, index) => {
     return (
       <tr
         key={index}
@@ -26,14 +36,24 @@ const LearnersPage = () => {
         <td>
           <div className=" flex items-center gap-2">
             {/* edit */}
-            <Link to={"/learners/id"} title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            <Link
+              to={"/learners/id"}
+              title="View "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+            >
               <img src={viewbutton} alt="" width={16} height={16} />
             </Link>
-            <button  title="Edit " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            <button
+              title="Edit "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+            >
               <img src={editbutton} alt="" width={16} height={16} />
             </button>
             {/* delete */}
-            <button  title="Delete " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
+            <button
+              title="Delete "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple"
+            >
               <img src={deleteButton} alt="" width={16} height={16} />
             </button>
           </div>
@@ -55,7 +75,10 @@ const LearnersPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button
+              onClick={handleOpenModal}
+              className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl"
+            >
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -63,6 +86,12 @@ const LearnersPage = () => {
         </div>
       </div>
       <Table columns={learnersColumns} renderRow={renderRow} data={mentors} />
+      {/* AddLearnerModal Component */}
+      <AddLearnerModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleAddLearner}
+      />
     </div>
   );
 };

@@ -7,25 +7,25 @@ import deleteButton from "../../../assets/images/trash-2.png";
 import listFilter from "../../../assets/images/list-filter.png";
 import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
-import {
-  countryColumns,
-} from "../../../constants/global.constant";
+import { countryColumns } from "../../../constants/global.constant";
 import { useCountries } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddCountryModal from "../../../components/modals/AddCountryModal";
+import AddCountryModal from "../../../components/modals/add/AddCountryModal";
+import EditCountryModal from "../../../components/modals/edit/EditCountryModal";
 
 const CountryListPage = () => {
   const { data: Countries, status, error } = useCountries();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   if (status === "pending") {
-    return <PediatorLoader/>;
+    return <PediatorLoader />;
   }
 
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  
 
   // Handle form submission
   const handleAddCountry = (formData) => {
@@ -33,7 +33,17 @@ const CountryListPage = () => {
     // You can send formData to an API here
   };
 
+  // Handle updating a country
+  const handleUpdateCountry = (updatedData) => {
+    console.log("Updated Country Data:", updatedData);
+    // API call to update country can go here
+  };
 
+  // Open Edit Modal
+  const handleEdit = (country) => {
+    setSelectedCountry(country);
+    setIsEditModalOpen(true);
+  };
 
   const renderRow = (item, index) => {
     console.log(item, "Countries");
@@ -44,7 +54,9 @@ const CountryListPage = () => {
       >
         <td className="flex items-center gap-4 p-4">{index + 1}</td>
         <td className="hidden md:table-cell">{item?.name}</td>
-        <td className="hidden md:table-cell">{item?.status}</td>
+        <td className="hidden md:table-cell">
+          {item?.status ? "Active" : "Inactive"}
+        </td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}
@@ -57,6 +69,7 @@ const CountryListPage = () => {
             </Link>
             {/* edit */}
             <button
+              onClick={() => handleEdit(item)} // Open Edit Modal with country data
               title="Edit"
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >
@@ -88,7 +101,10 @@ const CountryListPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button  onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl"
+            >
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -99,9 +115,19 @@ const CountryListPage = () => {
       {/* Render the Modal When Open */}
       {isModalOpen && (
         <AddCountryModal
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          onSubmit={handleAddCountry} 
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleAddCountry}
+        />
+      )}
+
+      {/* Edit Country Modal */}
+      {isEditModalOpen && (
+        <EditCountryModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          onSubmit={handleUpdateCountry}
+          countryData={selectedCountry}
         />
       )}
     </div>
