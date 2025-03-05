@@ -11,10 +11,27 @@ import { Link } from "react-router-dom";
 import { useCourses } from "../../../hooks/useCourseCategories";
 import PediatorLoader from "../../../components/PediatorLoader";
 import AddCourseModal from "../../../components/modals/AddCourseModal";
+import EditCourseModal from "../../../components/modals/edit/EditCourseModal";
 
 const CoursesPage = () => {
   const { data: courses, status, error } = useCourses();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const mockCourseData = {
+    courseName: "React for Beginners",
+    category: "Web Development",
+    price: "99",
+    duration: "6",
+    instructor: "John Doe",
+    status: true,
+  };
+
+  const handleUpdate = (updatedCourse) => {
+    console.log("Updated Course Data:", updatedCourse);
+    // Call API to update course in backend
+  };
 
   if (status === "pending") {
     return <PediatorLoader/>;
@@ -55,8 +72,13 @@ const CoursesPage = () => {
             </Link>
             {/* edit */}
             <button
-              title="Edit "
-              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+              onClick={() => {
+                setSelectedCourse(mockCourseData);
+                setIsEditModalOpen(true);
+                title = "Edit ";
+                className =
+                  "cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky";
+              }}
             >
               <img src={editbutton} alt="" width={16} height={16} />
             </button>
@@ -96,6 +118,13 @@ const CoursesPage = () => {
       <Table columns={coursesColumns} renderRow={renderRow} data={courses} />
       {/* Course Modal */}
       <AddCourseModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleAddCourse} />
+
+      <EditCourseModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        courseData={selectedCourse}
+        onUpdate={handleUpdate}
+      />
     </div>
   );
 };

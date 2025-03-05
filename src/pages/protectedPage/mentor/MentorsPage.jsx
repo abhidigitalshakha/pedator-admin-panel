@@ -11,11 +11,28 @@ import { Link } from "react-router-dom";
 import { useMentors } from "../../../hooks/useMentors";
 import PediatorLoader from "../../../components/PediatorLoader";
 import AddMentorModal from "../../../components/modals/AddMentorModal";
+import EditCourseModal from "../../../components/modals/edit/EditCourseModal";
+import EditMentorModal from "../../../components/modals/edit/EditMentorModal";
 
 const MentorsPage = () => {
+  const [selectedMentor, setSelectedMentor] = useState(null);
+
+  const mockMentorData = {
+    username: "JohnDoe",
+    registrationType: "emailPassword",
+    email: "johndoe@example.com",
+    mobileNumber: "",
+    password: "",
+    status: true,
+  };
+
+  const handleUpdate = (updatedMentor) => {
+    console.log("Updated Mentor Data:", updatedMentor);
+    // Call API to update mentor here
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const handleAddMentor = (mentorData) => {
     console.log("Mentor Data Submitted:", mentorData);
   };
@@ -50,11 +67,12 @@ const MentorsPage = () => {
             >
               <img src={viewbutton} alt="" width={16} height={16} />
             </Link>
-            <button
-              title="Edit "
-              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
-            >
-              <img src={editbutton} alt="" width={16} height={16} />
+            <button onClick={() => {
+              setSelectedMentor(mockMentorData);
+              setIsEditModalOpen(true);
+            }}  title="Edit "
+            className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky" >
+               <img src={editbutton} alt="" width={16} height={16} />
             </button>
             {/* delete */}
             <button
@@ -95,6 +113,12 @@ const MentorsPage = () => {
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleAddMentor}
       />
+      <EditMentorModal
+  isOpen={isEditModalOpen}
+  onClose={() => setIsEditModalOpen(false)}
+  mentorData={selectedMentor}  // Changed prop name for clarity
+  onUpdate={handleUpdate}
+/>
     </div>
   );
 };
