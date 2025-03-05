@@ -23,9 +23,9 @@ const CityListPage = () => {
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  console.log(cities.data, "Countries");
-
+  
   const renderRow = (item, index) => {
+    console.log(item, "citydata");
     return (
       <tr
         key={index}
@@ -40,7 +40,7 @@ const CityListPage = () => {
           <div className=" flex items-center gap-2">
             {/* view */}
             <Link
-              to={"/courses/id"}
+              to={"/city/id"}
               title="View "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >

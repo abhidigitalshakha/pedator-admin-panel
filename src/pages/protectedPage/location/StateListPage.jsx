@@ -24,9 +24,9 @@ const StateListPage = () => {
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  console.log(states.data, "Countries");
-
+  
   const renderRow = (item, index) => {
+    console.log(item, "state");
     return (
       <tr
         key={index}
@@ -40,7 +40,7 @@ const StateListPage = () => {
           <div className=" flex items-center gap-2">
             {/* view */}
             <Link
-              to={"/courses/id"}
+              to={"/state/id"}
               title="View "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >

@@ -21,10 +21,10 @@ const CourseSubCategory = () => {
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  console.log(courseSubCategory.data[0].status, "courser");
 
   const renderRow = (item, index) => {
-    console.log(item.status);
+    console.log(item,"course category");
+
 
     return (
       <tr

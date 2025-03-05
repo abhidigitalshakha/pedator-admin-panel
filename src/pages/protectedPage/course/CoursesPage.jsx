@@ -21,9 +21,9 @@ const CoursesPage = () => {
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  console.log(courses.data, "courser");
-
+  
   const renderRow = (item, index) => {
+    console.log(item, "courser");
     return (
       <tr
         key={index}

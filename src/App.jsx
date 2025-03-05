@@ -18,6 +18,9 @@ import CourseSubCategory from "./pages/protectedPage/course/CourseSubCategoryLis
 import CountryListPage from "./pages/protectedPage/location/CountryListPage";
 import StateListPage from "./pages/protectedPage/location/StateListPage";
 import CityListPage from "./pages/protectedPage/location/CityListPage";
+import CountryDetailPage from "./pages/protectedPage/location/CountryDeatilPage";
+import CityDetailPage from "./pages/protectedPage/location/CityDetailPage";
+import StateDetailPage from "./pages/protectedPage/location/StateDetailPage";
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
               <Route path="/country" element={<CountryListPage />} />
               <Route path="/state" element={<StateListPage />} />
               <Route path="/city" element={<CityListPage />} />
+              <Route path="/country/:id" element={<CountryDetailPage />} />
+              <Route path="/state/:id" element={<StateDetailPage />} />
+              <Route path="/city/:id" element={<CityDetailPage />} />
               <Route path="/transitions" element={<TransactionsPage />} />
               <Route
                 path="/transitions/id"

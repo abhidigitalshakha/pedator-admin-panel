@@ -26,6 +26,8 @@ const CourseCategory = () => {
   }
 
   const renderRow = (item, index) => {
+    console.log(item,"course category");
+    
     return (
       <tr
         key={index}
