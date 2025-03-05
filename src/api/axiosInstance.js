@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response, // Directly return the response
   (error) => {
-    if (error.response && error.response.status === 401 && error.response.status === 403) {
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
       // Token expired or unauthorized access
       localStorage.removeItem('token'); 
       localStorage.removeItem('user');  
