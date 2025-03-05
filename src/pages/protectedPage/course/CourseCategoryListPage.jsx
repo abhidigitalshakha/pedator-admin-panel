@@ -40,7 +40,7 @@ const CourseCategory = () => {
           <div className=" flex items-center gap-2">
             {/* view */}
             <Link
-              to={"/courses/id"}
+              to={"/course-category/id"}
               title="View "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >
