@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import navbarLogo from "../assets/images/appLogoMobileView.png";
 import AnimatedHeading from "./AnimatedHeading";
-import profile from "../assets/images/user-pen.png"
-import logoutButton from "../assets/images/power.png"
+import profile from "../assets/images/user-pen.png";
+import logoutButton from "../assets/images/power.png";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   return (
     <div className="bg-[#dff7f5] w-full p-4 rounded-lg flex flex-row justify-between shadow-lg">
@@ -32,7 +40,7 @@ const Navbar = () => {
                 </span>
                 <span>Profile</span>
               </div>
-              <div className="flex justify-between items-center">
+              <div onClick={handleLogout} className="flex justify-between items-center cursor-pointer">
                 <span className="rounded-full bg-[#ffa2a2] w-fit p-2 flex justify-center items-center">
                   <img src={logoutButton} alt="" className="w-4" />
                 </span>
