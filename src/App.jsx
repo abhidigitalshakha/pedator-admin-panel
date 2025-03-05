@@ -21,6 +21,7 @@ import CityListPage from "./pages/protectedPage/location/CityListPage";
 import CountryDetailPage from "./pages/protectedPage/location/CountryDeatilPage";
 import CityDetailPage from "./pages/protectedPage/location/CityDetailPage";
 import StateDetailPage from "./pages/protectedPage/location/StateDetailPage";
+import CourseCategoryDetailPage from "./pages/protectedPage/course/CourseCategoryDetailPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
               <Route path="/courses" element={<CoursesPage />} />
               <Route path="/courses/id" element={<CourseDetailPage />} />
               <Route path="/course-category" element={<CourseCategory />} />
+              <Route path="/course-category/:id" element={<CourseCategoryDetailPage />} />
               <Route
                 path="/course-sub-category"
                 element={<CourseSubCategory />}

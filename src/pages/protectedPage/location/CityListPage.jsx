@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../../components/Table";
 import SearchBar from "../../../components/SearchBar";
 import editbutton from "../../../assets/images/square-pen.png";
@@ -12,9 +12,11 @@ import {
 } from "../../../constants/global.constant";
 import { useCities, useStates } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
+import AddCityModal from "../../../components/modals/AddCityModal";
 
 const CityListPage = () => {
   const { data: cities, status, error } = useCities();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (status === "pending") {
     return <PediatorLoader/>;
@@ -24,6 +26,23 @@ const CityListPage = () => {
     return <p>Error: {error.message}</p>;
   }
   
+
+  const countries = [
+    { _id: "1", name: "India" },
+    { _id: "2", name: "USA" },
+  ];
+
+  const states = [
+    { _id: "101", countryId: "1", name: "Maharashtra" },
+    { _id: "102", countryId: "1", name: "Karnataka" },
+    { _id: "201", countryId: "2", name: "California" },
+  ];
+
+  const handleAddCity = (cityData) => {
+    console.log("New City Added:", cityData);
+  };
+
+
   const renderRow = (item, index) => {
     console.log(item, "citydata");
     return (
@@ -79,7 +98,7 @@ const CityListPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -87,6 +106,13 @@ const CityListPage = () => {
         </div>
       </div>
       <Table columns={cityColumns} renderRow={renderRow} data={cities} />
+      <AddCityModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddCity}
+        countries={countries}
+        states={states}
+      />
     </div>
   );
 };
