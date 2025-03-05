@@ -80,18 +80,6 @@ const AddLearnerModal = ({ isOpen, onClose, onSubmit }) => {
           </div>
 
           {/* Status */}
-          <div className="flex items-center">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={learnerData.status}
-                onChange={() =>
-                  setLearnerData({ ...learnerData, status: !learnerData.status })
-                }
-              />
-              <span>{learnerData.status ? "Active" : "Inactive"}</span>
-            </label>
-          </div>
 
           {/* Age */}
           <div>
@@ -146,6 +134,19 @@ const AddLearnerModal = ({ isOpen, onClose, onSubmit }) => {
               Add Learner
             </button>
           </div>
+          <div className="flex items-center">
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={learnerData.status}
+                onChange={() =>
+                  setLearnerData({ ...learnerData, status: !learnerData.status })
+                }
+              />
+              <span>{learnerData.status ? "Active" : "Inactive"}</span>
+            </label>
+          </div>
+
         </form>
       </div>
     </div>

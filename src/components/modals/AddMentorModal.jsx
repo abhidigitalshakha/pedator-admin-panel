@@ -110,6 +110,17 @@ const AddMentorModal = ({ isOpen, onClose, onSubmit }) => {
           </div>
 
           {/* Status */}
+
+
+          {/* Submit Button */}
+          <div className="col-span-2 flex justify-end mt-4">
+            <button
+              type="submit"
+              className="px-4 py-2 bg-[#108e88] text-white rounded"
+            >
+              Register Mentor
+            </button>
+          </div>
           <div className="flex items-center">
             <label className="flex items-center space-x-2">
               <input
@@ -121,16 +132,6 @@ const AddMentorModal = ({ isOpen, onClose, onSubmit }) => {
               />
               <span>{mentorData.status ? "Active" : "Inactive"}</span>
             </label>
-          </div>
-
-          {/* Submit Button */}
-          <div className="col-span-2 flex justify-end mt-4">
-            <button
-              type="submit"
-              className="px-4 py-2 bg-[#108e88] text-white rounded"
-            >
-              Register Mentor
-            </button>
           </div>
         </form>
       </div>

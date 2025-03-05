@@ -39,8 +39,8 @@ export const menuItems = [
             },
             {
                 icon: transition,
-                label: "Transitions",
-                href: "/transitions",
+                label: "Transaction",
+                href: "/Transaction",
                 visible: ["admin", "super-admin", "student"],
             },
         ],
@@ -301,7 +301,7 @@ export const tutorsColumns = [
     assessor: "actions",
   },
 ];
-export const transitionsColumns = [
+export const TransactionColumns = [
   {
     header: "S.No",
     assessor: "sNo",
