@@ -2,6 +2,7 @@ import dashboard from "../assets/images/layout-dashboard.png"
 import folders from "../assets/images/folders.png"
 import circleUser from "../assets/images/circle-user.png"
 import graduationCap from "../assets/images/graduation-cap.png"
+import transition from "../assets/images/receipt-indian-rupee.png"
 
 export const menuItems = [
     {
@@ -34,6 +35,52 @@ export const menuItems = [
                 icon: graduationCap,
                 label: "Course",
                 href: "/courses",
+                visible: ["admin", "super-admin", "student"],
+            },
+            {
+                icon: transition,
+                label: "Transitions",
+                href: "/transitions",
+                visible: ["admin", "super-admin", "student"],
+            },
+        ],
+    },
+    {
+        title: "Courses",
+        items: [
+            {
+                icon: circleUser,
+                label: "Course Category",
+                href: "/course-category",
+                visible: ["admin", "super-admin", "student"],
+            },
+            {
+                icon: circleUser,
+                label: "Course Sub Category",
+                href: "/course-sub-category",
+                visible: ["admin", "super-admin", "student"],
+            },
+        ],
+    },
+    {
+        title: "Locations",
+        items: [
+            {
+                icon: circleUser,
+                label: "Country",
+                href: "/country",
+                visible: ["admin", "super-admin", "student"],
+            },
+            {
+                icon: circleUser,
+                label: "State",
+                href: "/state",
+                visible: ["admin", "super-admin", "student"],
+            },
+            {
+                icon: circleUser,
+                label: "City",
+                href: "/city",
                 visible: ["admin", "super-admin", "student"],
             },
         ],
@@ -103,6 +150,131 @@ export const coursesColumns = [
     assessor: "actions",
   },
 ];
+export const courseCategoryColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const countryColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const stateColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Country",
+    assessor: "Country",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const cityColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "State",
+    assessor: "State",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Country",
+    assessor: "Country",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const courseSubCategoryColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Category",
+    assessor: "Category",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
 export const tutorsColumns = [
   {
     header: "S.No",
@@ -122,6 +294,57 @@ export const tutorsColumns = [
   {
     header: "Mobile No",
     assessor: "mobile",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const transitionsColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Transaction ID",
+    assessor: "transactionID",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "User",
+    assessor: "user",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Role",
+    assessor: "role",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Type",
+    assessor: "type",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Amount",
+    assessor: "amount",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Date",
+    assessor: "date",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Remark",
+    assessor: "remark",
     className: "hidden md:table-cell",
   },
   {
@@ -220,3 +443,66 @@ export const tutors = [
     }
   ];
   
+
+export const transactions = [
+    {
+      id: "TXN001",
+      user: "Alice Johnson",
+      role: "Learner",
+      type: "Credit",
+      amount: 499,
+      status: "Success",
+      date: "2025-02-15",
+      remark: "Course Purchase",
+    },
+    {
+      id: "TXN002",
+      user: "Mark Wilson",
+      role: "Learner",
+      type: "Debit",
+      amount: 299,
+      status: "Pending",
+      date: "2025-02-14",
+      remark: "Refund Process",
+    },
+    {
+      id: "TXN003",
+      user: "Emma Brown",
+      role: "Mentor",
+      type: "Credit",
+      amount: 799,
+      status: "Success",
+      date: "2025-02-13",
+      remark: "Course Sold",
+    },
+    {
+      id: "TXN004",
+      user: "Sophia Williams",
+      role: "Mentor",
+      type: "Debit",
+      amount: 499,
+      status: "Failed",
+      date: "2025-02-12",
+      remark: "Withdrawal Request",
+    },
+    {
+      id: "TXN005",
+      user: "James Anderson",
+      role: "Learner",
+      type: "Credit",
+      amount: 999,
+      status: "Success",
+      date: "2025-02-11",
+      remark: "Course Purchase",
+    },
+    {
+      id: "TXN006",
+      user: "Platform Fees",
+      role: "Other",
+      type: "Debit",
+      amount: 300,
+      status: "Completed",
+      date: "2025-02-10",
+      remark: "Platform Expense",
+    },
+  ];

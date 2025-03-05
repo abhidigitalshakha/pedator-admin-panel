@@ -3,8 +3,6 @@ import AppLogo from "../assets/images/AppLogo.png";
 import MobileAppLogo from "../assets/images/appLogoMobileView.png";
 import Menu from "../components/Menu";
 import Navbar from "../components/Navbar";
-import DashboardPage from "../pages/protectedPage/DashboardPage";
-import LearnersPage from "../pages/protectedPage/LearnersPage";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {

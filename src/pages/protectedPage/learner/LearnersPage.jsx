@@ -1,41 +1,16 @@
 import React from "react";
-import Table from "../../components/Table";
-import SearchBar from "../../components/SearchBar";
-import { mentors, tutors, tutorsColumns } from "../../constants/global.constant";
-import editbutton from "../../assets/images/square-pen.png";
-import viewbutton from "../../assets/images/eye.png";
-import deleteButton from "../../assets/images/trash-2.png";
-import listFilter from "../../assets/images/list-filter.png";
-import addButtonWhite from "../../assets/images/plus-white.png";
+import Table from "../../../components/Table";
+import SearchBar from "../../../components/SearchBar";
+import { learnersColumns, mentors } from "../../../constants/global.constant";
+import editbutton from "../../../assets/images/square-pen.png";
+import viewbutton from "../../../assets/images/eye.png";
+import deleteButton from "../../../assets/images/trash-2.png";
+import listFilter from "../../../assets/images/list-filter.png";
+import addButtonWhite from "../../../assets/images/plus-white.png";
+import { Link } from "react-router-dom";
 
-// const columns = [
-//   {
-//     header: "S.No",
-//     assessor: "sNo",
-//     className: "p-4",
-//   },
-//   {
-//     header: "Username",
-//     assessor: "Username",
-//     className: "hidden md:table-cell",
-//   },
-//   {
-//     header: "E-mail",
-//     assessor: "eMail",
-//     className: "hidden md:table-cell",
-//   },
-//   {
-//     header: "Mobile No",
-//     assessor: "mobileNo",
-//     className: "hidden md:table-cell",
-//   },
-//   {
-//     header: "Actions",
-//     assessor: "actions",
-//   },
-// ];
 
-const MentorsPage = () => {
+const LearnersPage = () => {
   const renderRow = (item, index) => {
     // console.log(item,"itemhiqwertyuasdfghj");
 
@@ -51,9 +26,9 @@ const MentorsPage = () => {
         <td>
           <div className=" flex items-center gap-2">
             {/* edit */}
-            <button title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            <Link to={"/learners/id"} title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
               <img src={viewbutton} alt="" width={16} height={16} />
-            </button>
+            </Link>
             <button  title="Edit " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
               <img src={editbutton} alt="" width={16} height={16} />
             </button>
@@ -71,7 +46,7 @@ const MentorsPage = () => {
     <div className="bg-white p-4 rounded-md flex-1 m-4 border border-gray-300 shadow-xl">
       <div className="flex items-center justify-between">
         <h1 className=" hidden md:block text-3xl md:text-5xl font-semibold text-[#108e88]">
-          Mentors
+          Learners
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-4  w-full md:w-auto">
           <SearchBar />
@@ -87,9 +62,9 @@ const MentorsPage = () => {
           </div>
         </div>
       </div>
-      <Table columns={tutorsColumns} renderRow={renderRow} data={tutors} />
+      <Table columns={learnersColumns} renderRow={renderRow} data={mentors} />
     </div>
   );
 };
 
-export default MentorsPage;
+export default LearnersPage;

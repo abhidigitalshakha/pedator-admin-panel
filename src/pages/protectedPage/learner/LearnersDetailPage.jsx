@@ -1,5 +1,5 @@
 import React from "react";
-import userPrfileIcon from "../../../src/assets/images/coloured-circle-user.png"
+import userPrfileIcon from "../../../assets/images/coloured-circle-user.png"
 
 const student = {
   name: "John Doe",

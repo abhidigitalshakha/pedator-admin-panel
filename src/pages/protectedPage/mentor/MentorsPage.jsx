@@ -1,18 +1,29 @@
 import React from "react";
-import Table from "../../components/Table";
-import SearchBar from "../../components/SearchBar";
-import { learnersColumns, mentors } from "../../constants/global.constant";
-import editbutton from "../../assets/images/square-pen.png";
-import viewbutton from "../../assets/images/eye.png";
-import deleteButton from "../../assets/images/trash-2.png";
-import listFilter from "../../assets/images/list-filter.png";
-import addButtonWhite from "../../assets/images/plus-white.png";
+import Table from "../../../components/Table";
+import SearchBar from "../../../components/SearchBar";
+import { tutorsColumns } from "../../../constants/global.constant";
+import editbutton from "../../../assets/images/square-pen.png";
+import viewbutton from "../../../assets/images/eye.png";
+import deleteButton from "../../../assets/images/trash-2.png";
+import listFilter from "../../../assets/images/list-filter.png";
+import addButtonWhite from "../../../assets/images/plus-white.png";
+import { Link } from "react-router-dom";
+import { useMentors } from "../../../hooks/useMentors";
+import PediatorLoader from "../../../components/PediatorLoader";
 
+const MentorsPage = () => {
+  const { data: mentors, status, error } = useMentors();
 
-const LearnersPage = () => {
+  if (status === "pending") {
+    return <PediatorLoader/>;
+  }
+
+  if (status === "error") {
+    return <p>Error: {error.message}</p>;
+  }
+  console.log(mentors.data, "courser");
+
   const renderRow = (item, index) => {
-    // console.log(item,"itemhiqwertyuasdfghj");
-
     return (
       <tr
         key={index}
@@ -25,14 +36,24 @@ const LearnersPage = () => {
         <td>
           <div className=" flex items-center gap-2">
             {/* edit */}
-            <button title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            <Link
+              to={"/mentors/id"}
+              title="View "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+            >
               <img src={viewbutton} alt="" width={16} height={16} />
-            </button>
-            <button  title="Edit " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            </Link>
+            <button
+              title="Edit "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+            >
               <img src={editbutton} alt="" width={16} height={16} />
             </button>
             {/* delete */}
-            <button  title="Delete " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
+            <button
+              title="Delete "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple"
+            >
               <img src={deleteButton} alt="" width={16} height={16} />
             </button>
           </div>
@@ -45,7 +66,7 @@ const LearnersPage = () => {
     <div className="bg-white p-4 rounded-md flex-1 m-4 border border-gray-300 shadow-xl">
       <div className="flex items-center justify-between">
         <h1 className=" hidden md:block text-3xl md:text-5xl font-semibold text-[#108e88]">
-          Learners
+          Mentors
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-4  w-full md:w-auto">
           <SearchBar />
@@ -61,9 +82,9 @@ const LearnersPage = () => {
           </div>
         </div>
       </div>
-      <Table columns={learnersColumns} renderRow={renderRow} data={mentors} />
+      <Table columns={tutorsColumns} renderRow={renderRow} data={mentors} />
     </div>
   );
 };
 
-export default LearnersPage;
+export default MentorsPage;
