@@ -13,7 +13,7 @@ import {
 } from "../../../constants/global.constant";
 import { useStates } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddStateModal from "../../../components/modals/AddStateModal";
+import AddStateModal from "../../../components/modals/add/AddStateModal";
 import EditStateModal from "../../../components/modals/edit/EditStateModal";
 
 const StateListPage = () => {
@@ -56,7 +56,6 @@ const StateListPage = () => {
     setEditModalOpen(false); // Close modal after update
   };
 
-
   const renderRow = (item, index) => {
     console.log(item, "state");
     return (
@@ -67,7 +66,9 @@ const StateListPage = () => {
         <td className="flex items-center gap-4 p-4">{index + 1}</td>
         <td className="hidden md:table-cell">{item?.name}</td>
         <td className="hidden md:table-cell">{item?.countryName}</td>
-        <td className="hidden md:table-cell"> {item?.status ? "Active" : "Inactive"}</td>
+        <td className="hidden md:table-cell">
+          {item?.status ? "Active" : "Inactive"}
+        </td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}

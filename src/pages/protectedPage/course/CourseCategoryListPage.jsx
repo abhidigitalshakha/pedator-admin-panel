@@ -13,29 +13,42 @@ import {
 } from "../../../hooks/useCourseCategories";
 import { courseCategoryColumns } from "../../../constants/global.constant";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddCourseCategoryModal from "../../../components/modals/AddCourseCategoryModal";
+import AddCourseCategoryModal from "../../../components/modals/add/AddCourseCategoryModal";
+import EditCourseCategoryModal from "../../../components/modals/edit/EditCourseCategoryModal";
 
 const CourseCategory = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleAddCategory = (categoryData) => {
     console.log("Course Category Data:", categoryData);
     // Send this data to your backend or handle it as needed
   };
 
+  const handleEditCategory = (updatedData) => {
+    console.log("Updated Category Data:", updatedData);
+    // Send updated data to backend
+  };
+
   const { data: courseCategory, status, error } = useCourseCategories();
 
   if (status === "pending") {
-    return <PediatorLoader/>;
+    return <PediatorLoader />;
   }
 
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
 
+  const openEditModal = (category) => {
+    setSelectedCategory(category);
+    setIsEditModalOpen(true);
+  };
+
   const renderRow = (item, index) => {
-    console.log(item,"course category");
-    
+    console.log(item, "course category");
+
     return (
       <tr
         key={index}
@@ -43,7 +56,7 @@ const CourseCategory = () => {
       >
         <td className="flex items-center gap-4 p-4">{index + 1}</td>
         <td className="hidden md:table-cell">{item?.name}</td>
-        <td className="hidden md:table-cell">{item?.status}</td>
+        <td className="hidden md:table-cell">{item?.status ? "Active" : "Inactive"}</td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}
@@ -56,6 +69,7 @@ const CourseCategory = () => {
             </Link>
             {/* edit */}
             <button
+            onClick={() => openEditModal(item)}
               title="Edit "
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >
@@ -87,7 +101,10 @@ const CourseCategory = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button
+              onClick={() => setIsAddModalOpen(true)}
+              className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl"
+            >
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -99,11 +116,22 @@ const CourseCategory = () => {
         renderRow={renderRow}
         data={courseCategory}
       />
-            <AddCourseCategoryModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+
+      <AddCourseCategoryModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
         onSubmit={handleAddCategory}
       />
+
+       {/* Edit Category Modal */}
+       {selectedCategory && (
+        <EditCourseCategoryModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          onSubmit={handleEditCategory}
+          categoryData={selectedCategory}
+        />
+      )}
     </div>
   );
 };
