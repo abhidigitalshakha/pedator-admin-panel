@@ -10,10 +10,9 @@ import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
 import { useMentors } from "../../../hooks/useMentors";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddMentorModal from "../../../components/modals/AddMentorModal";
+import AddMentorModal from "../../../components/modals/add/AddMentorModal";
 
 const MentorsPage = () => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddMentor = (mentorData) => {
@@ -22,7 +21,7 @@ const MentorsPage = () => {
   const { data: mentors, status, error } = useMentors();
 
   if (status === "pending") {
-    return <PediatorLoader/>;
+    return <PediatorLoader />;
   }
 
   if (status === "error") {
@@ -82,7 +81,10 @@ const MentorsPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl"
+            >
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>

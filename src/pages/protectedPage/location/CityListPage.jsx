@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { cityColumns } from "../../../constants/global.constant";
 import { useCities, useStates } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddCityModal from "../../../components/modals/AddCityModal";
+import AddCityModal from "../../../components/modals/add/AddCityModal";
 import EditCityModal from "../../../components/modals/edit/EditCityModal";
 
 const CityListPage = () => {

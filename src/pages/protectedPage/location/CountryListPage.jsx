@@ -7,33 +7,28 @@ import deleteButton from "../../../assets/images/trash-2.png";
 import listFilter from "../../../assets/images/list-filter.png";
 import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
-import {
-  countryColumns,
-} from "../../../constants/global.constant";
+import { countryColumns } from "../../../constants/global.constant";
 import { useCountries } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddCountryModal from "../../../components/modals/AddCountryModal";
+import AddCountryModal from "../../../components/modals/add/AddCountryModal";
 
 const CountryListPage = () => {
   const { data: Countries, status, error } = useCountries();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (status === "pending") {
-    return <PediatorLoader/>;
+    return <PediatorLoader />;
   }
 
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  
 
   // Handle form submission
   const handleAddCountry = (formData) => {
     console.log("Country Submitted:", formData);
     // You can send formData to an API here
   };
-
-
 
   const renderRow = (item, index) => {
     console.log(item, "Countries");
@@ -88,7 +83,10 @@ const CountryListPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button  onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl"
+            >
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -99,9 +97,9 @@ const CountryListPage = () => {
       {/* Render the Modal When Open */}
       {isModalOpen && (
         <AddCountryModal
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          onSubmit={handleAddCountry} 
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleAddCountry}
         />
       )}
     </div>
