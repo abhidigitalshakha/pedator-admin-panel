@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../../components/Table";
 import SearchBar from "../../../components/SearchBar";
 import { courses, coursesColumns } from "../../../constants/global.constant";
@@ -10,9 +10,11 @@ import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
 import { useCourses } from "../../../hooks/useCourseCategories";
 import PediatorLoader from "../../../components/PediatorLoader";
+import AddCourseModal from "../../../components/modals/AddCourseModal";
 
 const CoursesPage = () => {
   const { data: courses, status, error } = useCourses();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (status === "pending") {
     return <PediatorLoader/>;
@@ -22,6 +24,12 @@ const CoursesPage = () => {
     return <p>Error: {error.message}</p>;
   }
   
+
+  const handleAddCourse = (formData) => {
+    console.log("Submitted Course Data:", formData);
+    // Here, send the formData to your API
+  };
+
   const renderRow = (item, index) => {
     console.log(item, "courser");
     return (
@@ -78,7 +86,7 @@ const CoursesPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -86,6 +94,8 @@ const CoursesPage = () => {
         </div>
       </div>
       <Table columns={coursesColumns} renderRow={renderRow} data={courses} />
+      {/* Course Modal */}
+      <AddCourseModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleAddCourse} />
     </div>
   );
 };
