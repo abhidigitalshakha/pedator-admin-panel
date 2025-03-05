@@ -41,7 +41,7 @@ const CoursesPage = () => {
         <td className="hidden md:table-cell">{item.categoryId.name}</td>
         <td className="hidden md:table-cell">{item.subCategoryId.name}</td>
         <td className="hidden md:table-cell">{item?.mentorId?.firstName}</td>
-        <td className="hidden md:table-cell">{item.status}</td>
+        <td className="hidden md:table-cell">{item?.status ? "Active" : "Inactive"}</td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}

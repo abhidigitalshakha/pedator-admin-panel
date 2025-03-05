@@ -11,10 +11,13 @@ import { countryColumns } from "../../../constants/global.constant";
 import { useCountries } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
 import AddCountryModal from "../../../components/modals/add/AddCountryModal";
+import EditCountryModal from "../../../components/modals/edit/EditCountryModal";
 
 const CountryListPage = () => {
   const { data: Countries, status, error } = useCountries();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   if (status === "pending") {
     return <PediatorLoader />;
@@ -30,6 +33,18 @@ const CountryListPage = () => {
     // You can send formData to an API here
   };
 
+  // Handle updating a country
+  const handleUpdateCountry = (updatedData) => {
+    console.log("Updated Country Data:", updatedData);
+    // API call to update country can go here
+  };
+
+  // Open Edit Modal
+  const handleEdit = (country) => {
+    setSelectedCountry(country);
+    setIsEditModalOpen(true);
+  };
+
   const renderRow = (item, index) => {
     console.log(item, "Countries");
     return (
@@ -39,7 +54,9 @@ const CountryListPage = () => {
       >
         <td className="flex items-center gap-4 p-4">{index + 1}</td>
         <td className="hidden md:table-cell">{item?.name}</td>
-        <td className="hidden md:table-cell">{item?.status}</td>
+        <td className="hidden md:table-cell">
+          {item?.status ? "Active" : "Inactive"}
+        </td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}
@@ -52,6 +69,7 @@ const CountryListPage = () => {
             </Link>
             {/* edit */}
             <button
+              onClick={() => handleEdit(item)} // Open Edit Modal with country data
               title="Edit"
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >
@@ -100,6 +118,16 @@ const CountryListPage = () => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onSubmit={handleAddCountry}
+        />
+      )}
+
+      {/* Edit Country Modal */}
+      {isEditModalOpen && (
+        <EditCountryModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          onSubmit={handleUpdateCountry}
+          countryData={selectedCountry}
         />
       )}
     </div>

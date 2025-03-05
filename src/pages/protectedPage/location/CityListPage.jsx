@@ -65,7 +65,7 @@ const CityListPage = () => {
         <td className="hidden md:table-cell">{item?.name}</td>
         <td className="hidden md:table-cell">{item?.stateName}</td>
         <td className="hidden md:table-cell">{item?.countryName}</td>
-        <td className="hidden md:table-cell">{item?.status}</td>
+        <td className="hidden md:table-cell">{item?.status ? "Active" : "Inactive"}</td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}

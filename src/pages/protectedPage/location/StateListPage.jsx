@@ -67,7 +67,6 @@ const StateListPage = () => {
         <td className="hidden md:table-cell">{item?.name}</td>
         <td className="hidden md:table-cell">{item?.countryName}</td>
         <td className="hidden md:table-cell">
-          {" "}
           {item?.status ? "Active" : "Inactive"}
         </td>
         <td>
