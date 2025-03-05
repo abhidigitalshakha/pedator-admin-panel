@@ -1,30 +1,31 @@
 import React from "react";
-import Table from "../../components/Table";
-import SearchBar from "../../components/SearchBar";
-import { tutorsColumns } from "../../constants/global.constant";
-import editbutton from "../../assets/images/square-pen.png";
-import viewbutton from "../../assets/images/eye.png";
-import deleteButton from "../../assets/images/trash-2.png";
-import listFilter from "../../assets/images/list-filter.png";
-import addButtonWhite from "../../assets/images/plus-white.png";
+import Table from "../../../components/Table";
+import SearchBar from "../../../components/SearchBar";
+import editbutton from "../../../assets/images/square-pen.png";
+import viewbutton from "../../../assets/images/eye.png";
+import deleteButton from "../../../assets/images/trash-2.png";
+import listFilter from "../../../assets/images/list-filter.png";
+import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
-import { useMentors } from "../../hooks/useMentors";
+import {
+  countryColumns,
+  stateColumns,
+} from "../../../constants/global.constant";
+import { useStates } from "../../../hooks/useLocation";
+import PediatorLoader from "../../../components/PediatorLoader";
 
-
-const MentorsPage = () => {
-const { data: mentors, status, error } = useMentors();
+const StateListPage = () => {
+  const { data: states, status, error } = useStates();
 
   if (status === "pending") {
-    return <div className="bg-white p-4 rounded-md flex-1 justify-center items-center flex min-h-[80%] m-4 border border-gray-300 shadow-xl">
-      <p>Loading...</p>
-    </div>;
+    return <PediatorLoader/>;
   }
 
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  console.log(mentors.data,"courser");
-  
+  console.log(states.data, "Countries");
+
   const renderRow = (item, index) => {
     return (
       <tr
@@ -32,20 +33,31 @@ const { data: mentors, status, error } = useMentors();
         className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-[#e7f5f4]"
       >
         <td className="flex items-center gap-4 p-4">{index + 1}</td>
-        <td className="hidden md:table-cell">{item.username}</td>
-        <td className="hidden md:table-cell">{item.email}</td>
-        <td className="hidden md:table-cell">{item.mobile}</td>
+        <td className="hidden md:table-cell">{item?.name}</td>
+        <td className="hidden md:table-cell">{item?.countryName}</td>
+        <td className="hidden md:table-cell">{item?.status}</td>
         <td>
           <div className=" flex items-center gap-2">
-            {/* edit */}
-            <Link to={"/mentors/id"} title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            {/* view */}
+            <Link
+              to={"/courses/id"}
+              title="View "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+            >
               <img src={viewbutton} alt="" width={16} height={16} />
             </Link>
-            <button  title="Edit " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
+            {/* edit */}
+            <button
+              title="Edit"
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+            >
               <img src={editbutton} alt="" width={16} height={16} />
             </button>
             {/* delete */}
-            <button  title="Delete " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
+            <button
+              title="Delete "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple"
+            >
               <img src={deleteButton} alt="" width={16} height={16} />
             </button>
           </div>
@@ -58,7 +70,7 @@ const { data: mentors, status, error } = useMentors();
     <div className="bg-white p-4 rounded-md flex-1 m-4 border border-gray-300 shadow-xl">
       <div className="flex items-center justify-between">
         <h1 className=" hidden md:block text-3xl md:text-5xl font-semibold text-[#108e88]">
-          Mentors
+          States
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-4  w-full md:w-auto">
           <SearchBar />
@@ -74,9 +86,9 @@ const { data: mentors, status, error } = useMentors();
           </div>
         </div>
       </div>
-      <Table columns={tutorsColumns} renderRow={renderRow} data={mentors} />
+      <Table columns={stateColumns} renderRow={renderRow} data={states} />
     </div>
   );
 };
 
-export default MentorsPage;
+export default StateListPage;

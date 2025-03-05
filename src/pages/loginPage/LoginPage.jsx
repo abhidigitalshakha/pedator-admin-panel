@@ -14,7 +14,7 @@ const LoginPage = () => {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
-      navigate("/dashboard");
+      navigate("/");
     }
   });
 

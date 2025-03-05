@@ -1,27 +1,27 @@
 import React from "react";
-import Table from "../../components/Table";
-import SearchBar from "../../components/SearchBar";
-import { courses, coursesColumns } from "../../constants/global.constant";
-import editbutton from "../../assets/images/square-pen.png";
-import viewbutton from "../../assets/images/eye.png";
-import deleteButton from "../../assets/images/trash-2.png";
-import listFilter from "../../assets/images/list-filter.png";
-import addButtonWhite from "../../assets/images/plus-white.png";
+import Table from "../../../components/Table";
+import SearchBar from "../../../components/SearchBar";
+import { courses, coursesColumns } from "../../../constants/global.constant";
+import editbutton from "../../../assets/images/square-pen.png";
+import viewbutton from "../../../assets/images/eye.png";
+import deleteButton from "../../../assets/images/trash-2.png";
+import listFilter from "../../../assets/images/list-filter.png";
+import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
-import { useCourses } from "../../hooks/useCourseCategories";
+import { useCourses } from "../../../hooks/useCourseCategories";
+import PediatorLoader from "../../../components/PediatorLoader";
 
 const CoursesPage = () => {
   const { data: courses, status, error } = useCourses();
 
   if (status === "pending") {
-    return <p>Loading courses...</p>;
+    return <PediatorLoader/>;
   }
 
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  console.log(courses.data,"courser");
-  
+  console.log(courses.data, "courser");
 
   const renderRow = (item, index) => {
     return (

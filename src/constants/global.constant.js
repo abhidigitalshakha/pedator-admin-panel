@@ -45,6 +45,46 @@ export const menuItems = [
             },
         ],
     },
+    {
+        title: "Courses",
+        items: [
+            {
+                icon: circleUser,
+                label: "Course Category",
+                href: "/course-category",
+                visible: ["admin", "super-admin", "student"],
+            },
+            {
+                icon: circleUser,
+                label: "Course Sub Category",
+                href: "/course-sub-category",
+                visible: ["admin", "super-admin", "student"],
+            },
+        ],
+    },
+    {
+        title: "Locations",
+        items: [
+            {
+                icon: circleUser,
+                label: "Country",
+                href: "/country",
+                visible: ["admin", "super-admin", "student"],
+            },
+            {
+                icon: circleUser,
+                label: "State",
+                href: "/state",
+                visible: ["admin", "super-admin", "student"],
+            },
+            {
+                icon: circleUser,
+                label: "City",
+                href: "/city",
+                visible: ["admin", "super-admin", "student"],
+            },
+        ],
+    },
 ]
 
 export const learnersColumns = [
@@ -103,6 +143,131 @@ export const coursesColumns = [
   {
     header: "Status",
     assessor: "status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const courseCategoryColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const countryColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const stateColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Country",
+    assessor: "Country",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const cityColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "State",
+    assessor: "State",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Country",
+    assessor: "Country",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Actions",
+    assessor: "actions",
+  },
+];
+export const courseSubCategoryColumns = [
+  {
+    header: "S.No",
+    assessor: "sNo",
+    className: "p-4",
+  },
+  {
+    header: "Name",
+    assessor: "Name",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Category",
+    assessor: "Category",
+    className: "hidden md:table-cell",
+  },
+  {
+    header: "Status",
+    assessor: "Status",
     className: "hidden md:table-cell",
   },
   {

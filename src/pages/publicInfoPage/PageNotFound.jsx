@@ -12,7 +12,7 @@ const PageNotFound = () => {
       </div>
 
       <Link
-        to="/dashboard"
+        to="/"
         className="px-6 py-2 text-white bg-teal-600 rounded-md hover:bg-teal-700 transition"
       >
         Back to Dashboard

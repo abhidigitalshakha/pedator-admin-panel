@@ -1,12 +1,12 @@
 import React from "react";
-import Table from "../../components/Table";
-import SearchBar from "../../components/SearchBar";
-import { learnersColumns, mentors } from "../../constants/global.constant";
-import editbutton from "../../assets/images/square-pen.png";
-import viewbutton from "../../assets/images/eye.png";
-import deleteButton from "../../assets/images/trash-2.png";
-import listFilter from "../../assets/images/list-filter.png";
-import addButtonWhite from "../../assets/images/plus-white.png";
+import Table from "../../../components/Table";
+import SearchBar from "../../../components/SearchBar";
+import { learnersColumns, mentors } from "../../../constants/global.constant";
+import editbutton from "../../../assets/images/square-pen.png";
+import viewbutton from "../../../assets/images/eye.png";
+import deleteButton from "../../../assets/images/trash-2.png";
+import listFilter from "../../../assets/images/list-filter.png";
+import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
 
 

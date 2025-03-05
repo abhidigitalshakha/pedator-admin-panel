@@ -1,14 +1,16 @@
 import React from "react";
-import Table from "../../components/Table";
-import SearchBar from "../../components/SearchBar";
-import editbutton from "../../assets/images/square-pen.png";
-import viewbutton from "../../assets/images/eye.png";
-import deleteButton from "../../assets/images/trash-2.png";
-import listFilter from "../../assets/images/list-filter.png";
-import addButtonWhite from "../../assets/images/plus-white.png";
-import { transactions, transitionsColumns } from "../../constants/global.constant";
+import Table from "../../../components/Table";
+import SearchBar from "../../../components/SearchBar";
+import editbutton from "../../../assets/images/square-pen.png";
+import viewbutton from "../../../assets/images/eye.png";
+import deleteButton from "../../../assets/images/trash-2.png";
+import listFilter from "../../../assets/images/list-filter.png";
+import addButtonWhite from "../../../assets/images/plus-white.png";
+import {
+  transactions,
+  transitionsColumns,
+} from "../../../constants/global.constant";
 import { Link } from "react-router-dom";
-
 
 const dashboardStats = {
   totalLearners: 1200,
@@ -21,34 +23,36 @@ const dashboardStats = {
 };
 
 const TransactionsPage = () => {
-
-    const renderRow = (item, index) => {
-        return (
-          <tr
-            key={index}
-            className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-[#e7f5f4]"
-          >
-            <td className="flex items-center gap-4 p-4">{index + 1}</td>
-            <td className="hidden md:table-cell">{item.id}</td>
-            <td className="hidden md:table-cell">{item.user}</td>
-            <td className="hidden md:table-cell">{item.role}</td>
-            <td className="hidden md:table-cell">{item.type}</td>
-            <td className="hidden md:table-cell">{item.amount}</td>
-            <td className="hidden md:table-cell">{item.status}</td>
-            <td className="hidden md:table-cell">{item.date}</td>
-            <td className="hidden md:table-cell">{item.remark}</td>
-            <td>
-              <div className=" flex items-center gap-2">
-                {/* edit */}
-                <Link to={"/transitions/id"} title="View " className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
-                  <img src={viewbutton} alt="" width={16} height={16} />
-                </Link>
-              </div>
-            </td>
-          </tr>
-        );
-      };
-    
+  const renderRow = (item, index) => {
+    return (
+      <tr
+        key={index}
+        className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-[#e7f5f4]"
+      >
+        <td className="flex items-center gap-4 p-4">{index + 1}</td>
+        <td className="hidden md:table-cell">{item.id}</td>
+        <td className="hidden md:table-cell">{item.user}</td>
+        <td className="hidden md:table-cell">{item.role}</td>
+        <td className="hidden md:table-cell">{item.type}</td>
+        <td className="hidden md:table-cell">{item.amount}</td>
+        <td className="hidden md:table-cell">{item.status}</td>
+        <td className="hidden md:table-cell">{item.date}</td>
+        <td className="hidden md:table-cell">{item.remark}</td>
+        <td>
+          <div className=" flex items-center gap-2">
+            {/* edit */}
+            <Link
+              to={"/transitions/id"}
+              title="View "
+              className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
+            >
+              <img src={viewbutton} alt="" width={16} height={16} />
+            </Link>
+          </div>
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <div className=" bg-white p-6">
@@ -107,7 +111,11 @@ const TransactionsPage = () => {
           </div>
         </div>
       </div>
-      <Table columns={transitionsColumns} renderRow={renderRow} data={transactions} />
+      <Table
+        columns={transitionsColumns}
+        renderRow={renderRow}
+        data={transactions}
+      />
     </div>
   );
 };
