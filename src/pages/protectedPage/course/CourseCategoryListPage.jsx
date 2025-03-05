@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../../components/Table";
 import SearchBar from "../../../components/SearchBar";
 import editbutton from "../../../assets/images/square-pen.png";
@@ -13,8 +13,16 @@ import {
 } from "../../../hooks/useCourseCategories";
 import { courseCategoryColumns } from "../../../constants/global.constant";
 import PediatorLoader from "../../../components/PediatorLoader";
+import AddCourseCategoryModal from "../../../components/modals/AddCourseCategoryModal";
 
 const CourseCategory = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddCategory = (categoryData) => {
+    console.log("Course Category Data:", categoryData);
+    // Send this data to your backend or handle it as needed
+  };
+
   const { data: courseCategory, status, error } = useCourseCategories();
 
   if (status === "pending") {
@@ -79,7 +87,7 @@ const CourseCategory = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -90,6 +98,11 @@ const CourseCategory = () => {
         columns={courseCategoryColumns}
         renderRow={renderRow}
         data={courseCategory}
+      />
+            <AddCourseCategoryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddCategory}
       />
     </div>
   );
