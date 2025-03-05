@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../../components/Table";
 import SearchBar from "../../../components/SearchBar";
 import editbutton from "../../../assets/images/square-pen.png";
@@ -12,9 +12,11 @@ import {
 } from "../../../constants/global.constant";
 import { useCountries } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
+import AddCountryModal from "../../../components/modals/AddCountryModal";
 
 const CountryListPage = () => {
   const { data: Countries, status, error } = useCountries();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (status === "pending") {
     return <PediatorLoader/>;
@@ -24,6 +26,15 @@ const CountryListPage = () => {
     return <p>Error: {error.message}</p>;
   }
   
+
+  // Handle form submission
+  const handleAddCountry = (formData) => {
+    console.log("Country Submitted:", formData);
+    // You can send formData to an API here
+  };
+
+
+
   const renderRow = (item, index) => {
     console.log(item, "Countries");
     return (
@@ -77,7 +88,7 @@ const CountryListPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button  onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -85,6 +96,14 @@ const CountryListPage = () => {
         </div>
       </div>
       <Table columns={countryColumns} renderRow={renderRow} data={Countries} />
+      {/* Render the Modal When Open */}
+      {isModalOpen && (
+        <AddCountryModal
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          onSubmit={handleAddCountry} 
+        />
+      )}
     </div>
   );
 };
