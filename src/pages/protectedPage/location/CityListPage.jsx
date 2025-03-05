@@ -7,25 +7,25 @@ import deleteButton from "../../../assets/images/trash-2.png";
 import listFilter from "../../../assets/images/list-filter.png";
 import addButtonWhite from "../../../assets/images/plus-white.png";
 import { Link } from "react-router-dom";
-import {
-  cityColumns,
-} from "../../../constants/global.constant";
+import { cityColumns } from "../../../constants/global.constant";
 import { useCities, useStates } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
 import AddCityModal from "../../../components/modals/AddCityModal";
+import EditCityModal from "../../../components/modals/edit/EditCityModal";
 
 const CityListPage = () => {
   const { data: cities, status, error } = useCities();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedCity, setSelectedCity] = useState(null);
 
   if (status === "pending") {
-    return <PediatorLoader/>;
+    return <PediatorLoader />;
   }
 
   if (status === "error") {
     return <p>Error: {error.message}</p>;
   }
-  
 
   const countries = [
     { _id: "1", name: "India" },
@@ -42,6 +42,17 @@ const CityListPage = () => {
     console.log("New City Added:", cityData);
   };
 
+  // Handle Edit City
+  const handleEditCity = (city) => {
+    setSelectedCity(city);
+    setIsEditModalOpen(true);
+  };
+
+  // Handle Update City
+  const handleUpdateCity = (updatedCity) => {
+    console.log("City Updated:", updatedCity);
+    setIsEditModalOpen(false);
+  };
 
   const renderRow = (item, index) => {
     console.log(item, "citydata");
@@ -67,6 +78,7 @@ const CityListPage = () => {
             </Link>
             {/* edit */}
             <button
+              onClick={() => handleEditCity(item)}
               title="Edit"
               className="cursor-pointer w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky"
             >
@@ -98,7 +110,10 @@ const CityListPage = () => {
               <img src={listFilter} alt="" className="w-6" />
             </button>
 
-            <button onClick={() => setIsModalOpen(true)} className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="cursor-pointer flex items-center justify-center rounded-full border pr-6 pl-4 py-1 gap-2 bg-[#108e88] hover:scale-105 text-white transition-all duration-300 font-bold text-xl"
+            >
               <img src={addButtonWhite} alt="" className="w-6" />
               Add New
             </button>
@@ -110,6 +125,16 @@ const CityListPage = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleAddCity}
+        countries={countries}
+        states={states}
+      />
+
+      {/* Edit City Modal */}
+      <EditCityModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSubmit={handleUpdateCity}
+        cityData={selectedCity}
         countries={countries}
         states={states}
       />
