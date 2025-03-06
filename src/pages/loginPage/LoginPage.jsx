@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import loginImage from "../../assets/images/Login.png";
 import AnimatedHeading from "../../components/AnimatedHeading";
 import { useAdminLogin } from "../../hooks/useAdminLogin";
-import { useNavigate } from "react-router-dom"; // Assuming you're using React Router
+import {Link, useNavigate } from "react-router-dom"; // Assuming you're using React Router
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const LoginPage = () => {
     mutate(
       { email, password },
       {
-        onSuccess: () => navigate("/"), // Move navigation here
+        onSuccess: () => navigate("/"),
       }
     );
     console.log(status);
@@ -134,12 +134,12 @@ const LoginPage = () => {
                       Remember me
                     </label>
                   </div>
-                  <a
-                    href="#"
+                  <Link 
+                    to="/forgot-password"
                     className="text-sm text-[#108e88] hover:underline"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <button
                   type="submit"

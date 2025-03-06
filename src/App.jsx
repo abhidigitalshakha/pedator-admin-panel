@@ -22,6 +22,8 @@ import CountryDetailPage from "./pages/protectedPage/location/CountryDeatilPage"
 import CityDetailPage from "./pages/protectedPage/location/CityDetailPage";
 import StateDetailPage from "./pages/protectedPage/location/StateDetailPage";
 import CourseCategoryDetailPage from "./pages/protectedPage/course/CourseCategoryDetailPage";
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route element={<IsProtectedRoute />}>
             <Route path="/" element={<MainLayout />}>
               <Route path="/" element={<DashboardPage />} />
