@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { cityColumns } from "../../../constants/global.constant";
 import { useCities, useStates } from "../../../hooks/useLocation";
 import PediatorLoader from "../../../components/PediatorLoader";
-import AddCityModal from "../../../components/modals/AddCityModal";
+import AddCityModal from "../../../components/modals/add/AddCityModal";
 import EditCityModal from "../../../components/modals/edit/EditCityModal";
 
 const CityListPage = () => {
@@ -65,7 +65,7 @@ const CityListPage = () => {
         <td className="hidden md:table-cell">{item?.name}</td>
         <td className="hidden md:table-cell">{item?.stateName}</td>
         <td className="hidden md:table-cell">{item?.countryName}</td>
-        <td className="hidden md:table-cell">{item?.status}</td>
+        <td className="hidden md:table-cell">{item?.status ? "Active" : "Inactive"}</td>
         <td>
           <div className=" flex items-center gap-2">
             {/* view */}
